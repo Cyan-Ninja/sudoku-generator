@@ -31,7 +31,7 @@ function generatePuzzle() {
 				groupX = Math.floor(xNum / 3);
 				groupY = Math.floor(yNum / 2);
 			}
-			puzzleTable.push({x: xNum, y: yNum, gX: groupX, gY: groupY});
+			puzzleTable.push({x: xNum, y: yNum, gX: groupX, gY: groupY, f: "", d: false});
 		}
 	}
 	console.log(puzzleTable);
@@ -41,9 +41,30 @@ function generatePuzzle() {
 		var found = false;
 		while (!found) {
 			tryLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
-
-
-			found = true; // Catch-All While Developing
+			var isOkay = true;
+			for (var checkItemNum = 0; checkItemNum < puzzleTable.length; checkItemNum++) {
+				checkItem = puzzleTable[checkItemNum];
+				if (checkItem.x == item.x) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+				if (checkItem.y == item.y) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+				if (checkItem.gX == item.gX && checkItem.gY == item.gY) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+			}
+			if (isOkay) {
+				found = true;
+			} else {
+				found = false;
+			}
 		}
 	}
 }
@@ -54,9 +75,9 @@ function generatePuzzle() {
 		For Each Item { --DONE
 			While (!Found) { --DONE
 				Choose Number From Alphabet --DONE
-				Check X Coordinates If It Fits
-				Check Y Coordinates If It Fits
-				Check Group Coordinates If It Fits
+				Check X Coordinates If It Fits --DONE
+				Check Y Coordinates If It Fits --DONE
+				Check Group Coordinates If It Fits --DONE
 				If Each Is True, Set The Fill
 			}
 		}
