@@ -1,5 +1,6 @@
 /* Main Script (JavaScript) */
-var puzzleSize = 9; // Size of Puzzle; Can Be 4x4, 6x6, 9x9, or 16x16.
+var puzzleSize = 9; // Size of Puzzle; Can Be 4x4, 6x6, 9x9, or 16x16
+var puzzleTable = [];
 function generatePuzzle() {
 	// Get Alphabet From Puzzle Size
 	var alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -22,7 +23,6 @@ function generatePuzzle() {
 	}
 	console.log("Puzzle Size: " + puzzleSize + "×" + puzzleSize);
 	// Create Table With X, Y, Group, Fill, & Displayed
-	var puzzleTable = [];
 	for (var xNum = 0; xNum < puzzleSize; xNum++) {
 		for (var yNum = 0; yNum < puzzleSize; yNum++) {
 			var groupX = Math.floor(xNum / Math.sqrt(puzzleSize));
@@ -61,6 +61,7 @@ function generatePuzzle() {
 				}
 			}
 			if (isOkay) {
+				item.f = tryLetter;
 				found = true;
 			} else {
 				found = false;
