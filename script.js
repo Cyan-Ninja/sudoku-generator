@@ -40,9 +40,8 @@ function generatePuzzle() {
 		var item = puzzleTable[itemNum];
 		var found = false;
 		while (!found) {
-			tryLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
-			console.log(item);
-			console.log(tryLetter);
+			tryLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
 
 			found = true; // Catch-All While Developing
 		}
