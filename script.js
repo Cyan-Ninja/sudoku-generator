@@ -21,12 +21,21 @@ function generatePuzzle() {
 			alphabet = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 	}
 	console.log("Puzzle Size: " + puzzleSize + "×" + puzzleSize);
-
+	// Create Table With X, Y, Group, Fill, & Displayed
+	var puzzleTable = [];
+	for (var xNum = 0; xNum < puzzleSize; xNum++) {
+		for (var yNum = 0; yNum < puzzleSize; yNum++) {
+			var groupX = Math.floor(xNum / 3);
+			var groupY = Math.floor(yNum / 3);
+			puzzleTable.push({x: xNum, y: yNum, gX: groupX, gY: groupY});
+		}
+	}
+	console.log(puzzleTable);
 }
 	/* Puzzle Steps */
 	/*
 		Get Alphabet --DONE
-		Create Table With X, Y, Group, Fill, & Displayed
+		Create Table With X, Y, Group, Fill, & Displayed --DONE
 		For Each Item {
 			While (!Found) {
 				Choose Number From Alphabet
