@@ -17,7 +17,7 @@
 #options {
 	margin: 1vw;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: center;
 	align-items: stretch;
 }
@@ -41,28 +41,14 @@ h2 {
 	text-decoration: underline;
 }
 
-textarea {
-	border: solid 0.25vw #ccc;
-	background-color: #ddd;
-	width: 90vw;
-}
-
 input {
-	width: 50vw;
+	flex: 1;
 	border: solid 0.25vw #ccc;
 	background-color: #ddd;
-}
-
-.checkbox {
-	width: auto;
-}
-
-#generatePuzzle {
-	width: 33.333vw;
 }
 
 button {
-width: 25vw;
+	flex: 1;
 	border: solid 0.25vw #ccc;
 	background-color: #ddd;
 }
@@ -71,7 +57,6 @@ canvas {
 	background-color: #fff;
 	align-self: center;
 	width: 75vw;
-	float: right;
 }
 
 a {
