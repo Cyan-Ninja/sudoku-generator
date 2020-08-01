@@ -25,8 +25,12 @@ function generatePuzzle() {
 	var puzzleTable = [];
 	for (var xNum = 0; xNum < puzzleSize; xNum++) {
 		for (var yNum = 0; yNum < puzzleSize; yNum++) {
-			var groupX = Math.floor(xNum / 3);
-			var groupY = Math.floor(yNum / 3);
+			var groupX = Math.floor(xNum / Math.sqrt(puzzleSize));
+			var groupY = Math.floor(yNum / Math.sqrt(puzzleSize));
+			if (puzzleSize == 6) {
+				groupX = Math.floor(xNum / 3);
+				groupY = Math.floor(yNum / 2);
+			}
 			puzzleTable.push({x: xNum, y: yNum, gX: groupX, gY: groupY});
 		}
 	}
@@ -36,7 +40,9 @@ function generatePuzzle() {
 		var item = puzzleTable[itemNum];
 		var found = false;
 		while (!found) {
-			// CODE HERE
+			tryLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
+			console.log(item);
+			console.log(tryLetter);
 
 			found = true; // Catch-All While Developing
 		}
@@ -48,7 +54,7 @@ function generatePuzzle() {
 		Create Table With X, Y, Group, Fill, & Displayed --DONE
 		For Each Item { --DONE
 			While (!Found) { --DONE
-				Choose Number From Alphabet
+				Choose Number From Alphabet --DONE
 				Check X Coordinates If It Fits
 				Check Y Coordinates If It Fits
 				Check Group Coordinates If It Fits
