@@ -14,7 +14,7 @@
 	text-align: center;
 }
 
-#wrapper {
+#options {
 	margin: 1vw;
 	display: flex;
 	flex-direction: column;
@@ -22,11 +22,11 @@
 	align-items: stretch;
 }
 
-#wrapper div {
+#options div {
 	margin: 1vw;
 }
 
-#wrapper div button {
+#options div button {
 	margin: 0.5vw;
 }
 
