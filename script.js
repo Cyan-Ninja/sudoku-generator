@@ -31,13 +31,23 @@ function generatePuzzle() {
 		}
 	}
 	console.log(puzzleTable);
+	// For Each Item, Check & Fill
+	for (var itemNum = 0; itemNum < puzzleTable.length; itemNum++) {
+		var item = puzzleTable[itemNum];
+		var found = false;
+		while (!found) {
+			// CODE HERE
+
+			found = true; // Catch-All While Developing
+		}
+	}
 }
 	/* Puzzle Steps */
 	/*
 		Get Alphabet --DONE
 		Create Table With X, Y, Group, Fill, & Displayed --DONE
-		For Each Item {
-			While (!Found) {
+		For Each Item { --DONE
+			While (!Found) { --DONE
 				Choose Number From Alphabet
 				Check X Coordinates If It Fits
 				Check Y Coordinates If It Fits
