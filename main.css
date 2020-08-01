@@ -15,7 +15,8 @@
 }
 
 #options {
-	margin: 1vw;
+	width: 100vw;
+	margin: -1vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

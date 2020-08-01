@@ -129,5 +129,3 @@
         console.table(sudokuArray);
         return sudokuArray;//return our array to start to do some sudoku
     }
-
-    SudokuCreate(16);//make a 9x9 sudoku

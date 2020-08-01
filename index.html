@@ -9,12 +9,8 @@
 	<body>
 		<h1 id="title">Sudoku Generator</h1>
 		<div id="options">
-			<button type="button" id="generatePuzzle" onclick="puzzleSize = 16;">16&times;16</button>
-			<button type="button" id="generatePuzzle" onclick="puzzleSize = 9;">9&times;9</button>
-			<button type="button" id="generatePuzzle" onclick="puzzleSize = 6;">6&times;6</button>
-			<button type="button" id="generatePuzzle" onclick="puzzleSize = 4;">4&times;4</button>
 			<input type="text" id="puzzleFont" placeholder="Font [Default: Arial]">
-			<button type="button" id="generatePuzzle" onclick="generatePuzzle();">Generate</button>
+			<button type="button" id="generatePuzzle" onclick="SudokuCreate(9);">Generate 9&times;9</button>
 		</div>
 		<canvas id="canvas">Your browser doesn't support the canvas tag, please update to a newer browser.</canvas><br>
 		<a href="" download="Puzzle.png" class="download" id="imageDownload">[Download Image]</a>
