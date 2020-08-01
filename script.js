@@ -1,74 +1,56 @@
 	var iterations = 0;
 	function SudokuCreate(maxNum) {
-		//generate number set
 		var numSet = [];
 		var sudokuArray = [];
-
-		//populates number set and files sudoku with the rows and columns it needs
-				for (var i = 1; i <= maxNum; ++i) {
+		// Make Sudoku Puzzle Array
+		for (var i = 1; i <= maxNum; ++i) {
 			numSet.push(i);
 			sudokuArray.push(new Array(maxNum));
 		}
-
-		//size of sub boxes, figure out more dynamic way to set this
-				var horizontalBoxSize = Math.floor(maxNum / Math.sqrt(maxNum));
-				var verticalBoxSize = Math.floor(maxNum / Math.sqrt(maxNum));
-				if (maxNum == 6) {
-					horizontalBoxSize = Math.floor(maxNum / 3);
-					verticalBoxSize = Math.floor(maxNum / 2);
-				}
-		var horizontalBoxSize = 3,
-			verticalBoxSize = 3;
-
-		//find random number from 0 to max number, expludes max
-		function getRandomInt(max) {
-			return Math.floor(Math.random() * max);
+		// Size Of Sub Boxes
+		var horizontalBoxSize = Math.floor(maxNum / Math.sqrt(maxNum)) + 1;
+		var verticalBoxSize = Math.floor(maxNum / Math.sqrt(maxNum)) + 1;
+		if (maxNum == 6) {
+			horizontalBoxSize = Math.floor(maxNum / 3) + 1;
+			verticalBoxSize = Math.floor(maxNum / 2) + 1;
 		}
+		var horizontalBoxSize = 3, verticalBoxSize = 3;
 
-		//places numbers in the sudoku array
+		// Place Numbers
 		function placeNumber(num, arr) {
-			var lastRowIndex = arr.length - 1, //the index of the last row in the working array
-				lastRow = arr[lastRowIndex], //the reference to the last row
-				rowsToCheck = lastRowIndex % verticalBoxSize, //find what row of the sub box we are in vertically
-				safeIndexes = [], //find which column is save to put a number in to
-				randomSafeIndex; //pick one of the columns to place the number into from the safeIndexes array
-
-			//used to find a safe column to place the number in the current row
+			var lastRowIndex = arr.length - 1, lastRow = arr[lastRowIndex], rowsToCheck = lastRowIndex % verticalBoxSize, safeIndexes = [], randomSafeIndex;
+			// Find A Safe Column For The Number In The Current Row
 			function findSafeIndex(boxesUsed) {
-				//looks at previous rows if inside the sub box to see if the current number can be placed in the sub box
+				// Check If The Current Number Can Fit In The Sub Box
 				function boxSafe(index) {
-					var indexBox = Math.floor(index / horizontalBoxSize);//finds which sub box the current index is in
-					if (boxesUsed.indexOf(indexBox) >= 0) {//checks to see if the current index's sub box has already been used
+					var indexBox = Math.floor(index / horizontalBoxSize); // Find Current Sub Box
+					if (boxesUsed.indexOf(indexBox) >= 0) { // Make Sure It Fits In Sub Box
 						return false;
 					} else {
 						return true;
 					}
 				}
-
-				//loop through the current row to find a safe place to put the number
+				// Loop Through Row To Find Safe Spot For Number
 				for (var indexInLastRow = 0, rowLen = lastRow.length; indexInLastRow < rowLen; ++indexInLastRow) {
-					var columnSafe = true; //assume the current column is safe
-
-					//make sure the current number isn't already used in this column
+					var columnSafe = true;
+					// Make Certain The Current Number Isn't Used
 					for (var rowIndex = arr.length - 1; rowIndex >= 0; --rowIndex) {
 						if(arr[rowIndex][indexInLastRow] === num) {
 							columnSafe = false;
 						}
 					}
-
-					//make sure current index is empty, column is safe, and that current box is safe
+					// Make Certain The Current Item Is Empty, And Correct Column And Row
 					if(lastRow[indexInLastRow] === undefined && columnSafe && boxSafe(indexInLastRow)) {
 						safeIndexes.push(indexInLastRow);
 					}
 				}
-
-				//return a safe index to be used for the current number
-				return safeIndexes[getRandomInt(safeIndexes.length)];
+				// Return A Safe Item For The Current Number
+				return safeIndexes[Math.floor(Math.random() * safeIndexes.length)];
 			}
 
-			var horizontalBoxesUsed = []; //records which sub box has been used, in the current sub box row
+			var horizontalBoxesUsed = []; // Records The Sub Boxes Used
 
-			//if we are not if the first row of the sub box, loop through the other rows to see which subboxes have been used
+			// If Not In First Row Of Sub Box, Loop Through Other Rows To Find Unused Sub Boxes
 			if (rowsToCheck > 0) {
 				for (var i = rowsToCheck; i > 0; --i) {
 					var horizontalBox = Math.floor(arr[lastRowIndex - i].indexOf(num) / horizontalBoxSize);
@@ -88,26 +70,26 @@
 			}
 		}
 
-		//loop through the numbers to set them in the sudoku
+		// Loop Through Numbers To Set
 		for (var i = numSet.length - 1; i >= 0; --i) {
-			var workingArray = [];//holds the rows we are currently working with and/or have already wored with
-			var possible = true;//is the sudoku even possible?
-			while (sudokuArray.length > 0) {//while there are rows in the sudokuArray have have been been processed keep looping
-				workingArray.push(sudokuArray.shift());//add a row to the working array from the sudoku array
+			var workingArray = []; // Hold Rows Being Worked With
+			var possible = true;
+			while (sudokuArray.length > 0) { // While Rows Need To Be Processed
+				workingArray.push(sudokuArray.shift()); // Add Row To The Working Array
 
-				possible = placeNumber(numSet[i], workingArray);//place the current working number in to the working array, to find out if the sudoku puzzle is possible
+				possible = placeNumber(numSet[i], workingArray); // Set The Current Number Into The Array To Find If The Puzzle Is Possible
 
-				if(possible !== true) {//if its not possible generate a new sudoku puzzle
+				if(possible !== true) { // If Not Possible To Create, Try Again
 					++iterations;
 					return SudokuCreate(maxNum);
 				}
 			}
 
-			//make the sudoku array equal to the working array when we're done
+			// Set The Array Once Finished
 			sudokuArray = workingArray;
 		}
 
-		console.log(iterations);
-		console.table(sudokuArray);
-		return sudokuArray;//return our array to start to do some sudoku
+		console.log("Iterations Taken: " + iterations);
+		//console.table(sudokuArray);
+		return sudokuArray; // Return Full Array Just For Clean Code
 	}
