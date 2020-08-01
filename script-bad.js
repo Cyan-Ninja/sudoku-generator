@@ -20,12 +20,39 @@ def generate_solution(self, grid):
             break
     grid[row][col]=0
     return False
+function shuffle(a) {
+	var j, x, i;
+	for (i = a.length - 1; i > 0; i--) {
+		j = Math.floor(Math.random() * (i + 1));
+		x = a[i];
+		a[i] = a[j];
+		a[j] = x;
+	}
+	return a;
+}
 function generateSolution(self, puzzleTable) {
-	for (var i = 0; i < puzzleTable.length; i++) {
+	for (var i = 0; i < this.puzzleTable.length; i++) {
 		row = puzzleTable[i].x;
 		col = puzzleTable[i].y;
-		if (puzzleTable) {
-			
+		if (puzzleTable[i].f == "") {
+			alphabet = shuffle(alphabet);
+			for (var alpha = 0; alpha < alphabet.length; alpha++) {
+				if (checkItem.x == item.x) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+				if (checkItem.y == item.y) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+				if (checkItem.gX == item.gX && checkItem.gY == item.gY) {
+					if (checkItem.f == tryLetter) {
+						isOkay = false;
+					}
+				}
+			}
 		}
 	}
 }

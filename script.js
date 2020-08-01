@@ -35,9 +35,56 @@ function generatePuzzle() {
 		}
 	}
 	console.log(puzzleTable);
-	// Test With Backtrack
-
+	// For Each Item, Check & Fill
+	function shuffle(a) {
+		var j, x, i;
+		for (i = a.length - 1; i > 0; i--) {
+			j = Math.floor(Math.random() * (i + 1));
+			x = a[i];
+			a[i] = a[j];
+			a[j] = x;
+		}
+		return a;
 	}
+	function checkCell(testPuzzleTable, cellNum, letter) {
+		var item = testPuzzleTable[cellNum];
+		var isOkay = true;
+		for (var i = 0; i < testPuzzleTable.length; i++) {
+			var checkItem = testPuzzleTable[i];
+			if (checkItem.x == item.x) {
+				if (checkItem.f == letter) {
+					isOkay = false;
+				}
+			}
+			if (checkItem.y == item.y) {
+				if (checkItem.f == letter) {
+					isOkay = false;
+				}
+			}
+			if (checkItem.gX == item.gX && checkItem.gY == item.gY) {
+				if (checkItem.f == letter) {
+					isOkay = false;
+				}
+			}
+		}
+		if (isOkay) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function recursiveCheck(myNum, myPuzzleTable) {
+		alphabet = shuffle(alphabet);
+		var alpha = alphabet[0];
+		if (checkCell(myPuzzleTable, myNum, alpha) == true) {
+			var newPuzzleTable = myPuzzleTable[myNum].f = alpha;
+			if (myNum >= myPuzzleTable.length) {
+				return newPuzzleTable;
+			}
+			recursiveCheck(myNum++, newPuzzleTable);
+		}
+	}
+	recursiveCheck(0, puzzleTable);
 }
 	/* Puzzle Steps */
 	/*
